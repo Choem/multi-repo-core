@@ -1,0 +1,5 @@
+# Only allow the following Kubernetes context
+allow_k8s_contexts('k3d-mr')
+
+# Include the microservices you want to live update here
+# include('../multi-repo-file-service/Tiltfile')
