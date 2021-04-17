@@ -20,8 +20,6 @@ if [ $CLUSTER_STATUS -eq 0 ]; then
         --port 9443:443@loadbalancer \
         --k3s-server-arg '--no-deploy=traefik' \
         --registry-use $REGISTRY_NAME:$REGISTRY_PORT
-
-    source ${ROOT_PATH}/scripts/add_secrets.sh
 elif [ $CLUSTER_STATUS -eq 1 ]; then
     k3d cluster start $CLUSTER_NAME
 elif [ $CLUSTER_STATUS -eq 2 ]; then
