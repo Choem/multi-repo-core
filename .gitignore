@@ -1,3 +1,4 @@
 .env
-Tiltfile
 tilt_modules
+services/*
+!services/.gitkeep

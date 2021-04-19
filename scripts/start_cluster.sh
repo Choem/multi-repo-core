@@ -16,10 +16,14 @@ if [ $CLUSTER_STATUS -eq 0 ]; then
     k3d registry create $REGISTRY_NAME --port $REGISTRY_PORT || true
 
     k3d cluster create $CLUSTER_NAME \
-        --port 9080:80@loadbalancer \
-        --port 9443:443@loadbalancer \
+        --servers $K3D_SERVERS \
+        --agents $K3D_AGENTS \
+        --port $K3D_HTTP_PORT:80@loadbalancer \
+        --port $K3D_HTTPS_PORT:443@loadbalancer \
         --k3s-server-arg '--no-deploy=traefik' \
         --registry-use $REGISTRY_NAME:$REGISTRY_PORT
+
+    source ${ROOT_PATH}/scripts/lib/setup_istio.sh
 elif [ $CLUSTER_STATUS -eq 1 ]; then
     k3d cluster start $CLUSTER_NAME
 elif [ $CLUSTER_STATUS -eq 2 ]; then
